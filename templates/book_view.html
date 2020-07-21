@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+{% block content %}
+
+<div class="flex mr-auto">
+    <div class="card" style="width: 18rem;">
+    {#  <img class="card-img-top" src=".../100px180/" alt="Card image cap">#}
+      <div class="card-body">
+        <h5 class="card-title">Card title</h5>
+        <h6>Author</h6>
+        <p class="card-text">{{ object.description }}</p>
+        <a href="{{ object.get_add_to_cart_url }}" class="btn btn-warning">Add to Cart</a>
+      </div>
+    </div>
+</div>
+
+{% endblock %}
