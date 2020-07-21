@@ -34,6 +34,11 @@ class Book(models.Model):
             'slug': self.slug
         })
 
+    def get_remove_from_cart_url(self):
+        return reverse("remove-from-cart", kwargs={
+            'slug': self.slug
+        })
+
 
 class OrderItem(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True)
@@ -44,6 +49,10 @@ class OrderItem(models.Model):
     def __str__(self):
         return f"{self.quantity} of {self.book.title}"
 
+    def get_total_book_price(self):
+        return self.quantity * self.book.price
+
+
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     books = models.ManyToManyField(OrderItem)
@@ -53,3 +62,9 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
+
+    def get_total_amount(self):
+        total = 0
+        for order_item in self.books.all():
+            total += order_item.get_total_book_price()
+        return total

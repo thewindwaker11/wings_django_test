@@ -9,6 +9,7 @@
         <h6>Written by {{ book.author }}</h6>
         <p class="card-text">${{ book.price }}</p>
         <a href="{{ book.get_add_to_cart_url }}" class="btn btn-warning">Add to Cart</a>
+        <a href="{{ book.get_remove_from_cart_url }}" class="btn btn-danger">Remove from Cart</a>
         <a href="{{ book.get_absolute_url }}" class="btn btn-primary">View</a>
       </div>
     </div>

@@ -1,0 +1,41 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<h3>Order Summary:</h3>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col">Total</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for order_item in object.books.all %}
+    <tr>
+      <td>{{ order_item.book.title }}</td>
+      <td>{{ order_item.book.price }}</td>
+      <td>
+          <a class="mr-2" href="{% url 'add-to-cart' order_item.book.slug %}">+</a>
+          {{ order_item.quantity }}
+          <a class="ml-2" href="{% url 'decrease-quantity-from-cart' order_item.book.slug %}">-</a>
+      </td>
+      <td>{{ order_item.get_total_book_price }} Euros</td>
+    </tr>
+<thead>
+  {% endfor %}
+      <tr>
+          <td scope="col">Total Amount</td>
+      <tr>
+    </thead>
+    <tbody>
+      <tr>
+          <td>{{ object.get_total_amount }} Euros</td>
+      </tr>
+    </tbody>
+</table>
+    <a class="btn btn-primary" href="">Proceed To Payment (not working)</a>
+    <a class="btn btn-danger" href="/">Go back</a>
+
+{% endblock %}
